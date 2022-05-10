@@ -36,7 +36,7 @@ template <class T> DynamicArray<T>::DynamicArray(int size, T* arr) : size(size),
 	memcpy(array, arr, size * sizeof(T));
 }
 template <class T> DynamicArray<T>::DynamicArray(const DynamicArray<T>& d_arr) : DynamicArray(d_arr.size, d_arr.array) {
-	memcpy(array, d_arr.array, size * sizeof(T));
+	//memcpy(array, d_arr.array, size * sizeof(T));
 }
 template <class T> DynamicArray<T>::DynamicArray(std::initializer_list<T> lst) {
 	size = lst.size();
@@ -117,7 +117,7 @@ template <class T> DynamicArray<T>* DynamicArray<T>::Concat(DynamicArray<T>* ano
 	return res;
 }
 template <class T> void DynamicArray<T>::Print() {
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < size; ++i) {
 		std::cout << array[i] << '\n';
 	}
 }

@@ -53,6 +53,8 @@ public:
 		std::cout << re << ((im >= 0) ? " + " : " ") << im << "i\n";
 	}
 };
+
+
 Complex operator+(const Complex& a, const Complex& b) {
 	Complex copy = a;
 	copy += b;

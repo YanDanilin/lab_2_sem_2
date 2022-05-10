@@ -1,8 +1,5 @@
 #include <iostream>
-//#include "DynamicArray.h"
-//#include "LinkedList.h"
-//#include "Sequence.h"
-#include "Stack.h"
+
 #include "Complex.h"
 #include "TowersOfHanoi.h"
 
@@ -15,7 +12,9 @@ int main() {
 
 	//Sequence<int> *ex = new ArraySequence<int>(5, arr);
 	//ex->Print();
-	//ArraySequence<int> darr{1, 2, 3, 4};
+	ArraySequence<int> darr{1, 2, 3, 4};
+	ArraySequence<int> copy = darr;
+	copy.Print();
 	//darr.Print();
 	//std::cout << "================\n";
 	//LinkedListSequence<double> list{5.5, 6.6, 7.7, 8.8};
@@ -41,10 +40,13 @@ int main() {
 		std::cout << "Not empty\n";
 	}*/
 	
+	Complex z(1.1, 2.2);
+	Complex x;
+	std::cout << z << '\n' << x << '\n';
 
-	Stack<Complex> source{3, 2, 1};
-	Stack<Complex> destination;
-	std::cout << "Before:\n";
+	//Stack<int> source{3, 2, 1};
+	//Stack<int> destination = source;
+	/*std::cout << "Before:\n";
 	source.Print(1);
 	if (source.Empty()) {
 		std::cout << "Empty\n";
@@ -79,7 +81,8 @@ int main() {
 	}
 	else {
 		std::cout << "Not empty\n";
-	}
+	}*/
+
 
 	return 0;
 }

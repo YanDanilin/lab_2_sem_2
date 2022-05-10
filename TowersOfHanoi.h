@@ -14,10 +14,24 @@ void MoveDisc(Stack<T>& from, Stack<T>& to) {
 template <class T>
 void HanoiTowers(int quant, Stack<T>& src, Stack<T>& dest, Stack<T>& tmp) {
 	if (quant == 1) {
+
+		std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
+		src.Print(1);
+		std::cout << "----------------------\n";
+		dest.Print(1);
+		std::cout << "----------------------\n";
+		tmp.Print(1);
 		MoveDisc(src, dest);
 	}
 	else {
 		HanoiTowers(quant - 1, src, tmp, dest);
+
+		std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
+		src.Print(1);
+		std::cout << "----------------------\n";
+		dest.Print(1);
+		std::cout << "----------------------\n";
+		tmp.Print(1);
 		MoveDisc(src, dest);
 		HanoiTowers(quant - 1, tmp, dest, src);
 	}
@@ -30,4 +44,11 @@ void TowersOfHanoi(int quant, Stack<T>& src, Stack<T>& dest) {
 	}
 	Stack<T> tmp(1);
 	HanoiTowers(quant, src, dest, tmp);
+	std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
+	src.Print(1);
+	std::cout << "----------------------\n";
+	dest.Print(1);
+	std::cout << "----------------------\n";
+	tmp.Print(1);
+	std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
 }

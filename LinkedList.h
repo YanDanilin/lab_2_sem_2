@@ -1,9 +1,8 @@
 #pragma once
+
 #include <iostream>
 #include <initializer_list>
 #include <algorithm>
-
-//using namespace std;
 
 
 template <class T> class LinkedList {
@@ -58,7 +57,7 @@ template <class T> LinkedList<T>::LinkedList(T* arr, int count) : size(count) {
 template <class T> LinkedList<T>::LinkedList(const LinkedList<T>& linked_list) : size(linked_list.size) {
 	Node* cur_ptr = linked_list.head;
 	for (int i = 0; i < size; i++) {
-		Node* ptr = new Node[1];
+		Node* ptr = new Node;
 		ptr->data = cur_ptr->data;
 		if (!head) {
 			head = ptr;
@@ -74,7 +73,7 @@ template <class T> LinkedList<T>::LinkedList(std::initializer_list<T> lst) {
 	size = lst.size();
 	T* arr = new T[size];
 	std::copy(lst.begin(), lst.end(), arr);
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < size; ++i) {
 		Node* ptr = new Node;
 		ptr->data = arr[i];
 		if (!head) {
@@ -113,7 +112,7 @@ template <class T> T LinkedList<T>::Get(int index) {
 		throw std::exception("Index is out of range");
 	}
 	struct Node* ptr = head;
-	for (int i = 0; i < index; i++) {
+	for (int i = 0; i < index; ++i) {
 		ptr = ptr->next;
 	}
 	return ptr->data;
@@ -137,10 +136,10 @@ template <class T> LinkedList<T>* LinkedList<T>::GetSublist(int start_index, int
 	LinkedList<T>* sublist = new LinkedList<T>;
 	sublist->size = end_index - start_index + 1;
 	Node* ptr = head;
-	for (int i = 0; i < start_index; i++) {
+	for (int i = 0; i < start_index; ++i) {
 		ptr = ptr->next;
 	}
-	for (int i = start_index; i <= end_index; i++) {
+	for (int i = start_index; i <= end_index; ++i) {
 		Node* new_ptr = new Node;
 		new_ptr->data = ptr->data;
 		if (!sublist->head) {
@@ -156,14 +155,14 @@ template <class T> LinkedList<T>* LinkedList<T>::GetSublist(int start_index, int
 }
 template <class T> void LinkedList<T>::Append(T item) {
 	if (!head || !tail) {
-		size++;
+		++size;
 		Node* ptr = new Node;
 		ptr->data = item;
 		head = ptr;
 		tail = ptr;
 		return;
 	}
-	size++;
+	++size;
 	Node* ptr = new Node;
 	ptr->data = item;
 	tail->next = ptr;
@@ -171,12 +170,12 @@ template <class T> void LinkedList<T>::Append(T item) {
 }
 template <class T> void LinkedList<T>::Prepend(T item) {
 	if (!head || !tail) {
-		size++;
+		++size;
 		Node* ptr = new Node;
 		head = ptr;
 		tail = ptr;
 	}
-	size++;
+	++size;
 	Node* ptr = new Node;
 	ptr->data = item;
 	ptr->next = head;
@@ -186,9 +185,9 @@ template <class T> void LinkedList<T>::InsertAt(int index, T item) {
 	if (index < 0 || index >= size) {
 		throw std::exception("Index is out of range");
 	}
-	size++;
+	++size;
 	Node* ptr = head;
-	for (int i = 0; i < index - 1; i++) {
+	for (int i = 0; i < index - 1; ++i) {
 		ptr = ptr->next;
 	}
 	Node* new_node = new Node;

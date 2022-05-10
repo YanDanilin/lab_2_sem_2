@@ -37,7 +37,7 @@ public:
 		array_items = new DynamicArray<T>(size, items);
 	}
 	ArraySequence(const ArraySequence<T>& another) {
-		array_items = new DynamicArray<T>(another.array_items);
+		array_items = new DynamicArray<T>(*(another.array_items));
 	}
 	ArraySequence(std::initializer_list<T> lst) {
 		array_items = new DynamicArray<T>(lst);
@@ -100,7 +100,7 @@ public:
 		list_items = new LinkedList<T>(size, items);
 	}
 	LinkedListSequence(const LinkedListSequence<T>& another) {
-		list_items = new LinkedList<T>(another.list_items);
+		list_items = new LinkedList<T>(*(another.list_items));
 	}
 	LinkedListSequence(std::initializer_list<T> lst) {
 		list_items = new LinkedList<T>(lst);

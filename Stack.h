@@ -3,9 +3,11 @@
 #include "Sequence.h"
 #include <initializer_list>
 
+
 //using namespace std;
 
-template <class T> class Stack {
+template <class T>
+class Stack {
 private:
 	Sequence<T>* ptr_sequence = nullptr;
 	int var = 0;
@@ -66,10 +68,12 @@ Stack<T>::Stack(Stack<T>& another) {
 	var = another.var;
 	switch (var) {
 	case 1:
-		ptr_sequence = new ArraySequence<T>(another);
+		ArraySequence<T> *copy_arr = static_cast<Sequence<T>*>(another.ptr_sequence);
+		ptr_sequence = new ArraySequence<T>(*copy_arr);
 		break;
 	case 2:
-		ptr_sequence = new LinkedListSequence<T>(another);
+		LinkedListSequence<T> *copy_list = static_cast<Sequence<T>*>(another.ptr_sequence);
+		ptr_sequence = new LinkedListSequence<T>(*copy_list);
 		break;
 	default:
 		throw std::exception("Not appropriate variant");
