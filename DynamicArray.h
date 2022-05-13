@@ -30,6 +30,9 @@ public:
 
 	DynamicArray<T>* GetSublist(int start_index, int end_index);
 	DynamicArray<T>* Concat(DynamicArray<T>* another);
+
+	bool operator==(const DynamicArray<T>& a);
+	bool operator!=(const DynamicArray<T>& a);
 };
 
 template <class T> DynamicArray<T>::DynamicArray(int size, T* arr) : size(size), array(new T[size + 1]) {
@@ -94,10 +97,6 @@ template <class T> void DynamicArray<T>::InsertAt(int index, T value) {
 		throw std::exception("Index is out of range");
 	} else {
 		Resize(size + 1);
-		//for (int i = size - 1; i > index; i--) {
-		//	Set(i, array[i - 1]);
-		//}
-		//Set(index, value);
 		std::memmove(array + index + 1, array + index, (size - index - 1) * sizeof(T));
 		Set(index, value);
 	}
@@ -127,4 +126,19 @@ template <class T> void DynamicArray<T>::Print(int num) {
 		std::cout << " -> " << array[i] ;
 	}
 	std::cout << '\n';
+}
+template <class T> bool DynamicArray<T>::operator==(const DynamicArray<T>& a) {
+	if (size != a.size) {
+		return false;
+	} else {
+		for (int i = 0; i < size; ++i) {
+			if (array[i] != a.array[i]) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+template <class T> bool DynamicArray<T>::operator!=(const DynamicArray<T>& a) {
+	return !(*this == a);
 }

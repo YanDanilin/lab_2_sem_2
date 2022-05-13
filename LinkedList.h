@@ -38,6 +38,8 @@ public:
 	void DeleteLast();
 	LinkedList<T>* Concat(LinkedList<T>* list);
 	LinkedList<T>* GetSublist(int start_index, int end_index);
+	bool operator==(const LinkedList<T>& a);
+	bool operator!=(const LinkedList<T>& a);
 };
 
 template <class T> LinkedList<T>::LinkedList(){}
@@ -182,18 +184,21 @@ template <class T> void LinkedList<T>::Prepend(T item) {
 	head = ptr;
 }
 template <class T> void LinkedList<T>::InsertAt(int index, T item) {
-	if (index < 0 || index >= size) {
+	if (index < 0 || index > size) {
 		throw std::exception("Index is out of range");
+	} else if (index == size) {
+		Append(item);
+	} else {
+		++size;
+		Node* ptr = head;
+		for (int i = 0; i < index - 1; ++i) {
+			ptr = ptr->next;
+		}
+		Node* new_node = new Node;
+		new_node->data = item;
+		new_node->next = ptr->next;
+		ptr->next = new_node;
 	}
-	++size;
-	Node* ptr = head;
-	for (int i = 0; i < index - 1; ++i) {
-		ptr = ptr->next;
-	}
-	Node* new_node = new Node;
-	new_node->data = item;
-	new_node->next = ptr->next;
-	ptr->next = new_node;
 }
 template <class T> void LinkedList<T>::DeleteLast() {
 	if (head) {
@@ -211,6 +216,7 @@ template <class T> void LinkedList<T>::DeleteLast() {
 		delete tail;
 		tail = ptr;
 		ptr->next = nullptr;
+		size--;
 	}
 }
 template <class T> LinkedList<T>* LinkedList<T>::Concat(LinkedList<T>* list) {
@@ -246,4 +252,23 @@ template <class T> void LinkedList<T>::Print(int num) {
 		ptr = ptr->next;
 	}
 	std::cout << '\n';
+}
+template <class T> bool LinkedList<T>::operator==(const LinkedList<T>& a) {
+	if (size != a.size) {
+		return false;
+	} else {
+		Node* ptr = head;
+		Node* ptr_a = a.head;
+		while (ptr) {
+			if (!ptr_a) return false;
+			if (ptr->data != ptr_a->data) return false;
+			ptr = ptr->next;
+			ptr_a = ptr_a->next;
+		}
+		if (ptr_a)	return false;
+	}
+	return true;
+}
+template <class T> bool LinkedList<T>::operator!=(const LinkedList<T>& a) {
+	return !(a == *this);
 }

@@ -51,4 +51,5 @@ void TowersOfHanoi(int quant, Stack<T>& src, Stack<T>& dest) {
 	std::cout << "----------------------\n";
 	tmp.Print(1);
 	std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
+
 }

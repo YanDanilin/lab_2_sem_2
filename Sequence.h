@@ -87,6 +87,9 @@ public:
 	void Print(int num) override {
 		array_items->Print(num);
 	}
+	bool operator==(const ArraySequence<T>& arr) {
+		return (*array_items == *arr.array_items);
+	}
 };
 
 template <class T> class LinkedListSequence : public Sequence<T> {
@@ -148,5 +151,8 @@ public:
 	}
 	void Print(int num) override {
 		list_items->Print(num);
+	}
+	bool operator==(const LinkedListSequence<T>& lst) {
+		return (*list_items == *lst.list_items);
 	}
 };
